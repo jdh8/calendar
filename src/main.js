@@ -96,7 +96,7 @@ function render() {
   $("#year").value = year;
   $("#month").value = month;
   $("#month").disabled = activeView === "terms";
-  $("#month-number").textContent = activeView === "terms" ? "24" : pad(month);
+  $("#month-number").textContent = activeView === "terms" ? "24" : month;
   $("#month-title").textContent =
     activeView === "terms"
       ? `${year} 年 · 二十四節氣`
@@ -160,7 +160,7 @@ function renderDetail(info) {
   // Day details always retain all events; filters only control the overview.
   const events = info.festivals;
   $("#day-detail").innerHTML =
-    `<div class="detail-top"><span class="eyebrow">${info.date === todayInTaiwan() ? "TODAY" : "SELECTED DAY"}</span><span class="detail-weekday">星期${weekdays[info.weekday]}</span></div><div class="detail-number">${pad(info.day)}<span class="day-stamp" aria-hidden="true">日<br>常</span></div><p class="detail-date">${info.year} 年 ${info.month} 月 ${info.day} 日</p><div class="lunar-detail"><span class="eyebrow">農曆</span><h3>${info.lunarMonthName}${info.lunarDayName}</h3><p>${info.ganZhi}年 · 肖${info.animal}</p></div><div class="detail-events">${info.term ? `<div class="detail-event"><span class="pill term">節氣</span><h4>${info.term.name} <time>${info.term.time}</time></h4><p>台灣時間 · ${info.term.official ? "官方曆象表" : "天文推算"}</p><a href="${info.term.source}" target="_blank" rel="noopener">查看來源 ↗</a></div>` : ""}${events.map((event) => `<div class="detail-event"><span class="pill ${event.category}">${categoryNames[event.category]}</span><h4>${escape(event.name)}</h4><p>${escape(event.note)}</p><a href="${escape(event.source)}" target="_blank" rel="noopener">查看來源 ↗</a></div>`).join("")}${!info.term && !events.length ? '<p class="quiet-day">平常的日子，也值得好好度過。<br><small>這一天沒有收錄的節慶。</small></p>' : ""}</div>${nextTerm ? `<button class="next-term" data-jump="${nextTerm.date}"><span class="eyebrow">下一個節氣 <span aria-hidden="true">↗</span></span><strong>${nextTerm.name}<span class="sun-symbol" aria-hidden="true">☼</span></strong><span>${Number(nextTerm.date.slice(5, 7))} 月 ${Number(nextTerm.date.slice(8))} 日 · ${nextTerm.time}</span><small>${nextTerm.official ? "官方曆象表" : "天文推算"} · UTC+8</small></button>` : ""}`;
+    `<div class="detail-top"><span class="eyebrow">${info.date === todayInTaiwan() ? "TODAY" : "SELECTED DAY"}</span><span class="detail-weekday">星期${weekdays[info.weekday]}</span></div><div class="detail-number">${info.day}<span class="day-stamp" aria-hidden="true">日<br>常</span></div><p class="detail-date">${info.year} 年 ${info.month} 月 ${info.day} 日</p><div class="lunar-detail"><span class="eyebrow">農曆</span><h3>${info.lunarMonthName}${info.lunarDayName}</h3><p>${info.ganZhi}年 · 肖${info.animal}</p></div><div class="detail-events">${info.term ? `<div class="detail-event"><span class="pill term">節氣</span><h4>${info.term.name} <time>${info.term.time}</time></h4><p>台灣時間 · ${info.term.official ? "官方曆象表" : "天文推算"}</p><a href="${info.term.source}" target="_blank" rel="noopener">查看來源 ↗</a></div>` : ""}${events.map((event) => `<div class="detail-event"><span class="pill ${event.category}">${categoryNames[event.category]}</span><h4>${escape(event.name)}</h4><p>${escape(event.note)}</p><a href="${escape(event.source)}" target="_blank" rel="noopener">查看來源 ↗</a></div>`).join("")}${!info.term && !events.length ? '<p class="quiet-day">平常的日子，也值得好好度過。<br><small>這一天沒有收錄的節慶。</small></p>' : ""}</div>${nextTerm ? `<button class="next-term" data-jump="${nextTerm.date}"><span class="eyebrow">下一個節氣 <span aria-hidden="true">↗</span></span><strong>${nextTerm.name}<span class="sun-symbol" aria-hidden="true">☼</span></strong><span>${Number(nextTerm.date.slice(5, 7))} 月 ${Number(nextTerm.date.slice(8))} 日 · ${nextTerm.time}</span><small>${nextTerm.official ? "官方曆象表" : "天文推算"} · UTC+8</small></button>` : ""}`;
 }
 
 function renderEvents() {
@@ -176,7 +176,7 @@ function renderEvents() {
     ? events
         .map(
           (event) =>
-            `<button class="event-row" data-jump="${event.date}"><span class="event-date">${pad(event.day)}<small>週${weekdays[event.weekday]}</small></span><span class="event-description"><strong>${escape(event.name)}</strong><small>${event.category === "term" ? `${event.time} · 台灣時間 · ${event.official ? "官方" : "推算"}` : escape(event.note)}</small></span><span class="pill ${event.category}">${categoryNames[event.category]}</span><span class="event-arrow" aria-hidden="true">↗</span></button>`,
+            `<button class="event-row" data-jump="${event.date}"><span class="event-date">${event.day}<small>週${weekdays[event.weekday]}</small></span><span class="event-description"><strong>${escape(event.name)}</strong><small>${event.category === "term" ? `${event.time} · 台灣時間 · ${event.official ? "官方" : "推算"}` : escape(event.note)}</small></span><span class="pill ${event.category}">${categoryNames[event.category]}</span><span class="event-arrow" aria-hidden="true">↗</span></button>`,
         )
         .join("")
     : '<p class="empty-state">這個月沒有符合篩選的項目。可開啟上方分類，看看其他日子。</p>';
