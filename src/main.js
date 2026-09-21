@@ -1,4 +1,3 @@
-import "./style.css";
 import {
   MIN_YEAR,
   MAX_YEAR,
