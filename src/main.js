@@ -188,8 +188,7 @@ function renderEvents() {
 function renderTerms(year) {
   const terms = solarTerms(year);
   $("#terms-title").textContent = `${year} 年，一年的二十四個時刻`;
-  $("#terms-source").innerHTML =
-    `採用<a href="${terms[0].source}" target="_blank" rel="noopener">日本國立天文台「二十四節氣・雜節 長期版」↗</a>。來源已設定為東八區（UT+8），保留表列日期與分鐘值；24:00 表示該日結束前的時刻取整至午夜。`;
+  $("#terms-source").href = terms[0].source;
   $("#year-terms").innerHTML = terms
     .map(
       (term, index) =>
