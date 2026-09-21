@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
+import { parseTerms } from "./import-terms.mjs";
 import {
   MIN_YEAR,
   MAX_YEAR,
+  OFFICIAL_SOURCE,
   parseDate,
   todayInTaiwan,
   shiftDate,
@@ -159,6 +161,36 @@ assert.throws(() => shiftMonth("2100-12-31", 1));
 assert.equal(todayInTaiwan(new Date("2026-09-20T16:00:00Z")), "2026-09-21");
 assert.equal(todayInTaiwan(new Date("2026-09-20T15:59:59Z")), "2026-09-20");
 
+// Reject a missing/wrong timezone and incomplete source tables.
+assert.throws(() => parseTerms('<table id="phenom"></table>', 2026));
+assert.throws(() => parseTerms('標準時:UT+9<sup>h</sup><table id="phenom"></table>', 2026));
+assert.throws(() => parseTerms('標準時:UT+8<sup>h</sup><table id="phenom"></table>', 2026));
+
+// NAOJ UT+8 values, including all seven DE440-checked midnight cases.
+for (const [year, name, date, time] of [
+  [1801, "小寒", "1801-01-06", "01:30"],
+  [2026, "芒種", "2026-06-05", "23:48"],
+  [2100, "小寒", "2100-01-05", "15:31"],
+  [1848, "冬至", "1848-12-21", "24:00"],
+  [1881, "冬至", "1881-12-22", "00:00"],
+  [1911, "立夏", "1911-05-07", "00:00"],
+  [1923, "雨水", "1923-02-19", "24:00"],
+  [1951, "冬至", "1951-12-23", "00:00"],
+  [1979, "大寒", "1979-01-20", "24:00"],
+  [2084, "春分", "2084-03-20", "00:00"],
+]) {
+  const term = solarTerms(year).find((entry) => entry.name === name);
+  assert.equal(term.date, date);
+  assert.equal(term.time, time);
+  assert.equal(dayInfo(date).term.name, name);
+}
+assert.equal(dayInfo("2026-06-05").term.name, "芒種");
+assert.equal(dayInfo("2026-06-06").term, undefined);
+for (const date of ["1848-12-22", "1923-02-20", "1979-01-21"])
+  assert.equal(dayInfo(date).term, undefined, date);
+assert(dayInfo("1848-12-21").festivals.some((event) => event.name === "冬至"));
+assert(!dayInfo("1848-12-22").festivals.some((event) => event.name === "冬至"));
+
 // Taipei Astronomical Museum 2021–2030 almanac, pages 7 and 11; independent published minute values.
 for (const [year, name, date, time] of [
   [2024, "春分", "2024-03-20", "11:06"],
@@ -172,7 +204,6 @@ for (const [year, name, date, time] of [
   const term = solarTerms(year).find((entry) => entry.name === name);
   assert.equal(term.date, date);
   assert.equal(term.time, time);
-  assert.equal(term.official, true);
 }
 for (let year = MIN_YEAR; year <= MAX_YEAR; year++) {
   const terms = solarTerms(year);
@@ -181,10 +212,11 @@ for (let year = MIN_YEAR; year <= MAX_YEAR; year++) {
     TERM_NAMES,
     `24 ordered terms, ${year}`,
   );
+  assert.deepEqual(terms.map((term) => term.date), terms.map((term) => term.date).sort());
   for (const term of terms) {
     assert.equal(parseDate(term.date).year, year);
-    assert.match(term.time, /^(?:[01]\d|2[0-3]):[0-5]\d$/);
-    assert.equal(term.official, year >= 2021 && year <= 2030);
+    assert.match(term.time, /^(?:(?:[01]\d|2[0-3]):[0-5]\d|24:00)$/);
+    assert.equal(term.source, `${OFFICIAL_SOURCE}?year=${year}&lst=8`);
   }
 }
 assert.throws(() => solarTerms(2101));

@@ -44,10 +44,12 @@ npm run preview
 
 ### 節氣
 
-- **2021–2030：** `src/official-terms.json` 的 240 個時刻直接取自[臺北市立天文科學教育館《2021–2030 簡易曆象表》](https://www-ws.gov.taipei/001/Upload/439/relfile/47557/7970699/11519980-d0a1-4547-a2ea-b86d6ad06fea.pdf)，每年的第一頁（PDF 第 1、3、…、19 頁）。取月、日、時、分，不以套件秒值覆蓋官方分鐘值。來源表的東經 120 度平均太陽時按 UTC+8 使用。
-- **其他支援年份：** lunar-javascript 天文算法，秒值四捨五入到分鐘，UI 標示「推算」。沒有逐年官方核驗，不能把顯示到分鐘視為整個 300 年區間均已驗證在一分鐘內；歷史與遠期 ΔT／地球自轉存在估算不確定性。
-- 引用日期：2026-09-21。官方資料隨專案打包，使用者不用連線查詢 API 或申請金鑰。
-- 測試包含官方代表時刻，以及全 300 年節氣數量、名稱順序、日期與時間合法性。完整名稱排序能捕捉套件的跨年冬至別名問題。
+- **1801–2100：** `src/official-terms.json` 收錄 300 年、7,200 筆節氣時刻，來源為[日本國立天文台「二十四節氣・雜節 長期版」](https://eco.mtk.nao.ac.jp/cgi-bin/koyomi/cande/phenomena_sy.cgi)。各年來源以 `?year=1801&lst=8` 等參數查閱；介面連結同樣設定為東八區。
+- **直接取得來源的 UT+8 表**（`lst=8`），讓來源在取整前換算時區。保留表列日期與分鐘值，包括同日 `24:00`，不將節氣移至隔日，也不再對日本已取整的時間減一小時。只取二十四節氣，不收錄日本雜節；名稱轉為繁體中文。
+- 七筆午夜邊界已用 DE440 獨立核對：三筆午夜前、四筆午夜後。1848 冬至、1923 雨水、1979 大寒保留前一日 `24:00`；詳見 [DE440 核對紀錄](docs/de440-method.md)。DE440 僅用於驗證，網站仍採日本資料。
+- 引用日期：2026-09-21。資料依國立天文台當時的理論與參數推算；[來源使用規定](https://eco.mtk.nao.ac.jp/koyomi/site/)允許引用。資料隨專案打包，使用者不用連線查詢 API 或申請金鑰。
+- 更新資料：執行 `node scripts/import-terms.mjs`。腳本以 EUC-JP 解碼來源，驗證時區、年份、節氣名稱、黃經順序與每年 24 筆，全部成功才寫入 JSON。
+- 測試涵蓋全 300 年的節氣順序、日期與時間合法性、來源連結，以及午夜取整後的節氣歸日與冬至節慶；另保留臺北天文館代表時刻作獨立核對。
 
 ### 節慶
 
@@ -63,12 +65,13 @@ npm run preview
 2. Repository → Settings → Pages → Build and deployment → Source 選 **GitHub Actions**。
 3. `.github/workflows/pages.yml` 會在推送 `main` 時測試、建置並部署，也可手動執行。
 
-建置使用相對資產路徑 `--base=./`，適用 `https://帳號.github.io/calendar/` 與自訂網域。此初始版本只在本機實作；尚未建立遠端 repository、推送或發布。
+建置使用相對資產路徑 `--base=./`，適用 `https://帳號.github.io/calendar/` 與自訂網域。本專案儲存庫為 [jdh8/calendar](https://github.com/jdh8/calendar)，部署網址為 [日常・萬年曆](https://jdh8.github.io/calendar/)。
 
 ## 檔案
 
 - `src/calendar.js`：日期邊界、農曆換算、節氣來源與事件整合。
 - `src/festivals.js`：節慶資料與移動日期規則。
-- `src/official-terms.json`：官方節氣分鐘表。
+- `src/official-terms.json`：日本國立天文台節氣分鐘表（來源 UT+8）。
+- `scripts/import-terms.mjs`：下載並驗證 1801–2100 年日本節氣資料。
 - `src/main.js`、`src/style.css`、`index.html`：原生 JavaScript 與響應式介面。
 - `scripts/test-*.mjs`：Node 內建斷言檢查，不需要測試框架。

@@ -19,8 +19,7 @@ const qingEras = [
 export const MIN_YEAR = 1801;
 export const MAX_YEAR = 2100;
 export const OFFICIAL_SOURCE =
-  "https://www-ws.gov.taipei/001/Upload/439/relfile/47557/7970699/11519980-d0a1-4547-a2ea-b86d6ad06fea.pdf";
-export const CALCULATION_SOURCE = "https://github.com/6tail/lunar-javascript";
+  "https://eco.mtk.nao.ac.jp/cgi-bin/koyomi/cande/phenomena_sy.cgi";
 export const TERM_NAMES =
   "小寒 大寒 立春 雨水 驚蟄 春分 清明 穀雨 立夏 小滿 芒種 夏至 小暑 大暑 立秋 處暑 白露 秋分 寒露 霜降 立冬 小雪 大雪 冬至".split(
     " ",
@@ -102,46 +101,12 @@ export function solarTerms(year) {
   if (!Number.isInteger(year) || year < MIN_YEAR || year > MAX_YEAR)
     throw new RangeError("年份超出範圍。");
   if (!termsCache.has(year)) {
-    let terms;
-    if (officialTerms[year]) {
-      terms = officialTerms[year].map((term) => ({
-        ...term,
-        official: true,
-        source: OFFICIAL_SOURCE,
-      }));
-    } else {
-      // The July table includes both winter solstices; filter by solar year before naming aliases.
-      const table = Solar.fromYmd(year, 7, 1).getLunar().getJieQiTable();
-      const aliases = {
-        DONG_ZHI: "冬至",
-        DA_XUE: "大雪",
-        XIAO_HAN: "小寒",
-        DA_HAN: "大寒",
-        LI_CHUN: "立春",
-        YU_SHUI: "雨水",
-        JING_ZHE: "驚蟄",
-      };
-      terms = Object.entries(table)
-        .filter(([, solar]) => solar.getYear() === year)
-        .map(([name, solar]) => {
-          const millis = Date.parse(
-            `${solar.toYmd()}T${solar.toYmdHms().slice(11)}+08:00`,
-          );
-          const rounded = new Date(
-            Math.round(millis / 60000) * 60000 + 8 * 3600000,
-          ).toISOString();
-          return {
-            name: aliases[name] || traditional(name),
-            date: rounded.slice(0, 10),
-            time: rounded.slice(11, 16),
-            official: false,
-            source: CALCULATION_SOURCE,
-          };
-        });
-    }
     termsCache.set(
       year,
-      terms.sort((a, b) => a.date.localeCompare(b.date)),
+      officialTerms[year].map((term) => ({
+        ...term,
+        source: `${OFFICIAL_SOURCE}?year=${year}&lst=8`,
+      })),
     );
   }
   return termsCache.get(year);
