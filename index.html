@@ -126,6 +126,35 @@
               </thead>
               <tbody id="calendar-body"></tbody>
             </table>
+            <script>
+              // ponytail: Gregorian-only placeholder grid so the layout is final
+              // before the main bundle (lunar data) loads; main.js replaces it.
+              {
+                const now = new Date(Date.now() + 8 * 3600e3);
+                const m = /^(\d{4})-(\d{2})-\d{2}$/.exec(
+                  new URLSearchParams(location.search).get("date"),
+                );
+                const ok = m && m[1] >= 1801 && m[1] <= 2100 && m[2] >= 1 && m[2] <= 12;
+                const year = ok ? +m[1] : now.getUTCFullYear();
+                const month = ok ? +m[2] : now.getUTCMonth() + 1;
+                const offset = new Date(Date.UTC(year, month - 1, 1)).getUTCDay();
+                const length = new Date(Date.UTC(year, month, 0)).getUTCDate();
+                let html = "";
+                for (let i = 0; i < Math.ceil((offset + length) / 7) * 7; i++) {
+                  const day = i - offset + 1;
+                  if (i % 7 === 0) html += "<tr>";
+                  html +=
+                    day < 1 || day > length
+                      ? '<td class="empty-day"></td>'
+                      : `<td${i % 7 % 6 ? "" : ' class="weekend"'}><span class="day"><span class="day-top"><span class="day-number">${day}</span></span></span></td>`;
+                }
+                document.getElementById("calendar-body").innerHTML = html;
+                document.getElementById("month-number").textContent = month;
+                document.getElementById("year").value = year;
+                document.getElementById("month-title").textContent =
+                  `${year} 年 ${"一二三四五六七八九十"[month - 1] ?? "十" + "一二"[month - 11]}月`;
+              }
+            </script>
             <p class="calendar-hint">
               <span aria-hidden="true">↳</span> 點選日期查看詳情<span
                 >方向鍵移動日期 · Home 回到月初</span
