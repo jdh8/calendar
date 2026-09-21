@@ -117,7 +117,7 @@ button {
   position: relative;
   background: transparent;
   padding: 0 0 2px;
-  font-size: 13px;
+  font-size: 15px;
   color: #62705c;
   white-space: nowrap;
 }
@@ -138,12 +138,12 @@ button {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 11px;
+  font-size: 13px;
   color: #62705c;
   white-space: nowrap;
 }
 .timezone b {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.4px;
   margin-left: 4px;
 }
@@ -166,7 +166,7 @@ main {
   margin-bottom: 42px;
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 2px;
   font-weight: 600;
   color: var(--muted);
@@ -180,7 +180,7 @@ main {
   margin: 13px 0 12px;
 }
 .intro {
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.5px;
   color: var(--muted);
   margin: 0;
@@ -190,7 +190,7 @@ main {
   border: 1px solid #cfd7cb;
   border-radius: 5px;
   padding: 12px 15px;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
@@ -209,6 +209,7 @@ main {
   justify-content: space-between;
   gap: 20px;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 24px;
   scroll-margin-top: 20px;
 }
@@ -232,7 +233,9 @@ main {
 }
 .month-heading p {
   margin: 0;
-  font-size: 10px;
+  text-wrap: balance;
+  word-break: keep-all;
+  font-size: 12px;
   letter-spacing: 1px;
   color: var(--muted);
 }
@@ -247,7 +250,7 @@ main {
   background: #fffefa;
   height: 35px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 14px;
   padding: 6px 8px;
 }
 .month-controls input {
@@ -275,7 +278,7 @@ main {
   color: white;
   border-radius: 4px;
   padding: 10px 17px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .today-button {
   white-space: nowrap;
@@ -305,7 +308,7 @@ main {
   gap: 8px;
   align-items: center;
   padding: 16px 19px;
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
   letter-spacing: 0.2px;
   border-bottom: 1px solid var(--line);
@@ -343,7 +346,7 @@ main {
 .calendar-table th {
   height: 37px;
   background: #f2f4ec;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   color: #62705c;
 }
@@ -397,13 +400,13 @@ main {
 .today-marker {
   background: var(--green);
   color: #fffefa;
-  font-size: 9px;
+  font-size: 11px;
   border-radius: 3px;
   padding: 2px 4px;
   line-height: 1.2;
 }
 .lunar-label {
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
 }
 .day-events {
@@ -414,14 +417,15 @@ main {
   max-width: 100%;
 }
 .day-event {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.5;
   display: block;
   overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 .day-event small {
   display: block;
-  font-size: 9px;
+  font-size: 11px;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.4px;
 }
@@ -435,7 +439,7 @@ main {
   color: #556b80;
 }
 .more-events {
-  font-size: 9px;
+  font-size: 11px;
   color: #62705c;
 }
 .empty-day {
@@ -448,7 +452,7 @@ main {
   );
 }
 .calendar-hint {
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
   margin: 0;
   padding: 13px 17px;
@@ -458,7 +462,7 @@ main {
 }
 .calendar-hint > span:last-child {
   margin-left: auto;
-  font-size: 9px;
+  font-size: 11px;
 }
 .day-detail {
   background: #eef1e6;
@@ -473,7 +477,7 @@ main {
   padding: 21px 22px 0;
 }
 .detail-weekday {
-  font-size: 11px;
+  font-size: 13px;
   color: #5f705e;
 }
 .detail-number {
@@ -489,7 +493,7 @@ main {
 .day-stamp {
   display: block;
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.4;
   letter-spacing: 1px;
   border: 1px solid #a8b49b;
@@ -498,7 +502,7 @@ main {
   padding: 6px 7px;
 }
 .detail-date {
-  font-size: 11px;
+  font-size: 13px;
   color: #62705c;
   margin: 0 22px 22px;
   letter-spacing: 0.5px;
@@ -517,7 +521,7 @@ main {
   margin: 8px 0;
 }
 .lunar-detail p {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 2px;
   color: #62705c;
   margin: 0;
@@ -533,7 +537,7 @@ main {
   border: 0;
 }
 .pill {
-  font-size: 9px;
+  font-size: 11px;
   display: inline-block;
   border-radius: 3px;
   padding: 3px 6px;
@@ -550,24 +554,24 @@ main {
   background: #e8edf0;
 }
 .detail-event h4 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   margin: 10px 0 6px;
 }
 .detail-event h4 time {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 400;
   margin-left: 4px;
 }
 .detail-event p {
-  font-size: 11px;
+  font-size: 13px;
   color: #62705c;
   line-height: 1.8;
   margin: 0;
 }
 .detail-event a {
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
   color: #65765c;
   text-decoration: none;
   margin-top: 7px;
@@ -585,7 +589,7 @@ main {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 1px;
 }
 .next-term strong {
@@ -604,24 +608,24 @@ main {
   line-height: 1;
 }
 .next-term > span:not(.eyebrow) {
-  font-size: 11px;
+  font-size: 13px;
   color: #5c7051;
 }
 .next-term > small {
-  font-size: 9px;
+  font-size: 11px;
   color: #62705c;
 }
 .next-term:hover {
   background: #dce5cc;
 }
 .quiet-day {
-  font-size: 12px;
+  font-size: 14px;
   color: #62705c;
   line-height: 2;
   margin: 23px 0;
 }
 .quiet-day small {
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
 }
 .events-section {
@@ -649,7 +653,7 @@ main {
   padding: 0;
 }
 .filters label {
-  font-size: 11px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -695,7 +699,7 @@ main {
 .event-date small {
   display: block;
   font-family: "Noto Sans TC", sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   color: #62705c;
   margin-top: 5px;
 }
@@ -707,23 +711,23 @@ main {
   flex: 1;
 }
 .event-description strong {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 .event-description small {
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .event-arrow {
-  font-size: 14px;
+  font-size: 15px;
   color: #62705c;
   margin-right: 3px;
 }
 .fine-print {
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
   line-height: 1.9;
 }
@@ -731,17 +735,17 @@ main {
   margin-top: 17px;
 }
 .empty-state {
-  font-size: 12px;
+  font-size: 14px;
   color: #62705c;
   padding: 25px 5px;
   grid-column: 1/-1;
 }
 .time-label {
-  font-size: 11px;
+  font-size: 13px;
   color: #62705c;
 }
 .source-note {
-  font-size: 12px;
+  font-size: 14px;
   color: #62705c;
   line-height: 1.8;
   margin-bottom: 25px;
@@ -771,7 +775,7 @@ main {
   border-color: #b6c3a9;
 }
 .term-index {
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
 }
 .term-card strong {
@@ -781,7 +785,7 @@ main {
   font-weight: 600;
 }
 .term-card > span:not(.term-index) {
-  font-size: 11px;
+  font-size: 13px;
   color: #62705c;
 }
 .term-card time {
@@ -789,12 +793,12 @@ main {
   font-size: 24px;
 }
 .term-card small {
-  font-size: 9px;
+  font-size: 11px;
   color: #62705c;
 }
 .status-message {
   color: #a94e3f;
-  font-size: 12px;
+  font-size: 14px;
   min-height: 18px;
   margin: 15px 0 0;
 }
@@ -807,12 +811,12 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
 }
 .footer-brand {
   font-family: var(--serif);
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 2px;
   color: #586b50;
 }
@@ -821,7 +825,7 @@ footer {
 }
 footer button {
   background: transparent;
-  font-size: 10px;
+  font-size: 12px;
   color: #62705c;
   padding: 5px;
 }
@@ -858,12 +862,12 @@ dialog::backdrop {
 }
 .about-content h3,
 .conversion-form h3 {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   margin: 23px 0 8px;
 }
 .about-content p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.9;
   color: #62705c;
 }
@@ -876,7 +880,7 @@ dialog::backdrop {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  font-size: 11px;
+  font-size: 13px;
   color: #62705c;
   margin-bottom: 9px;
 }
@@ -896,7 +900,7 @@ dialog::backdrop {
   color: #344d39;
   padding: 9px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 15px;
   min-height: 40px;
   max-width: 100%;
 }
@@ -909,7 +913,7 @@ dialog::backdrop {
   width: 100%;
 }
 #conversion-error {
-  font-size: 12px;
+  font-size: 14px;
   color: #b25743;
   line-height: 1.7;
 }
@@ -934,107 +938,8 @@ noscript {
   .timezone {
     display: none;
   }
-  .calendar-layout {
-    grid-template-columns: minmax(0, 1fr) 235px;
-    gap: 18px;
-  }
-  .day {
-    padding: 8px 6px;
-    min-height: 113px;
-  }
-  .calendar-hint > span:last-child {
-    display: none;
-  }
-  .year-terms {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-@media (max-width: 760px) {
-  .site-header {
-    height: 71px;
-    padding: 0 20px;
-    gap: 14px;
-  }
-  .brand {
-    font-size: 20px;
-    gap: 9px;
-  }
-  .brand small {
-    font-size: 12px;
-    letter-spacing: 1px;
-  }
-  .brand-divider {
-    margin: 0 4px;
-  }
-  .brand-mark {
-    width: 34px;
-    height: 34px;
-  }
-  .site-header nav {
-    gap: 16px;
-  }
-  .nav-button {
-    font-size: 11px;
-  }
-  #about-button {
-    display: none;
-  }
-  main {
-    padding: 30px 18px 15px;
-  }
-  .page-heading {
-    display: block;
-    margin-bottom: 31px;
-    align-items: flex-start;
-  }
-  .page-heading h1 {
-    font-size: 25px;
-    letter-spacing: 1px;
-  }
-  .page-heading .eyebrow {
-    font-size: 8px;
-    letter-spacing: 1.6px;
-  }
-  .intro {
-    font-size: 11px;
-    line-height: 1.8;
-    max-width: none;
-  }
-  .outline-button {
-    font-size: 10px;
-    padding: 8px 9px;
-    white-space: normal;
-    width: auto;
-    line-height: 1.7;
-    flex-shrink: 0;
-    margin-top: 16px;
-  }
-  .outline-button span {
-    display: none;
-  }
-  .workspace-toolbar {
-    flex-wrap: wrap;
-    gap: 17px;
-    margin-bottom: 18px;
-  }
-  .month-heading {
-    gap: 14px;
-  }
-  #month-number {
-    font-size: 47px;
-  }
-  .month-heading h2 {
-    font-size: 20px;
-  }
   .month-controls {
-    gap: 5px;
     width: 100%;
-  }
-  .month-controls input {
-    width: 75px;
-  }
-  .month-controls select {
-    width: 71px;
   }
   .today-button {
     margin-left: auto;
@@ -1042,14 +947,6 @@ noscript {
   .calendar-layout {
     grid-template-columns: 1fr;
     gap: 22px;
-  }
-  .day {
-    min-height: 105px;
-    padding: 8px 7px 6px;
-  }
-  .calendar-legend {
-    font-size: 9px;
-    padding: 13px 12px;
   }
   .day-detail {
     display: grid;
@@ -1067,7 +964,7 @@ noscript {
   }
   .detail-date {
     grid-column: 1;
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 20px;
   }
   .lunar-detail {
@@ -1115,6 +1012,107 @@ noscript {
   .next-term strong .sun-symbol {
     font-size: 30px;
   }
+  .calendar-hint > span:last-child {
+    display: none;
+  }
+  .year-terms {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 760px) {
+  .site-header {
+    height: 71px;
+    padding: 0 20px;
+    gap: 14px;
+  }
+  .brand {
+    font-size: 20px;
+    gap: 9px;
+  }
+  .brand small {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+  .brand-divider {
+    margin: 0 4px;
+  }
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+  .site-header nav {
+    gap: 16px;
+  }
+  .nav-button {
+    font-size: 13px;
+  }
+  #about-button {
+    display: none;
+  }
+  main {
+    padding: 30px 18px 15px;
+  }
+  .page-heading {
+    display: block;
+    margin-bottom: 31px;
+    align-items: flex-start;
+  }
+  .page-heading h1 {
+    font-size: 25px;
+    letter-spacing: 1px;
+  }
+  .page-heading .eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.6px;
+  }
+  .intro {
+    font-size: 13px;
+    line-height: 1.8;
+    max-width: none;
+  }
+  .outline-button {
+    font-size: 12px;
+    padding: 8px 9px;
+    white-space: normal;
+    width: auto;
+    line-height: 1.7;
+    flex-shrink: 0;
+    margin-top: 16px;
+  }
+  .outline-button span {
+    display: none;
+  }
+  .workspace-toolbar {
+    flex-wrap: wrap;
+    gap: 17px;
+    margin-bottom: 18px;
+  }
+  .month-heading {
+    gap: 14px;
+  }
+  #month-number {
+    font-size: 47px;
+  }
+  .month-heading h2 {
+    font-size: 20px;
+  }
+  .month-controls {
+    gap: 5px;
+  }
+  .month-controls input {
+    width: 75px;
+  }
+  .month-controls select {
+    width: 71px;
+  }
+  .day {
+    min-height: 105px;
+    padding: 8px 7px 6px;
+  }
+  .calendar-legend {
+    font-size: 11px;
+    padding: 13px 12px;
+  }
   .events-section {
     margin-top: 31px;
   }
@@ -1130,7 +1128,7 @@ noscript {
     grid-template-columns: 1fr;
   }
   .filters label {
-    font-size: 10px;
+    font-size: 12px;
     padding: 8px 10px;
   }
   .event-row {
@@ -1138,10 +1136,10 @@ noscript {
     padding: 15px 5px;
   }
   .event-description strong {
-    font-size: 13px;
+    font-size: 15px;
   }
   .event-description small {
-    font-size: 10px;
+    font-size: 12px;
   }
   .year-terms {
     grid-template-columns: repeat(3, 1fr);
@@ -1162,10 +1160,10 @@ noscript {
     flex-wrap: wrap;
     justify-content: flex-start;
     gap: 13px;
-    font-size: 9px;
+    font-size: 11px;
   }
   .footer-brand {
-    font-size: 11px;
+    font-size: 13px;
   }
   footer button {
     margin-left: auto;
@@ -1186,23 +1184,27 @@ noscript {
     gap: 12px;
   }
   .brand small {
-    font-size: 11px;
+    font-size: 13px;
   }
   .day {
     min-height: 107px;
-    padding: 7px 4px;
+    padding: 7px 2px;
+  }
+  .detail-date {
+    letter-spacing: 0;
+    margin-right: 0;
   }
   .day-number {
     font-size: 21px;
   }
   .day-event {
-    font-size: 9px;
+    font-size: 10px;
   }
   .lunar-label {
-    font-size: 9px;
+    font-size: 11px;
   }
   .calendar-legend {
-    font-size: 8px;
+    font-size: 11px;
   }
   .calendar-legend .dot {
     margin-left: 7px;
@@ -1229,11 +1231,7 @@ noscript {
     font-size: 23px;
   }
   .intro {
-    font-size: 10px;
-  }
-  .outline-button {
-    width: 95px;
-    padding: 7px;
+    font-size: 12px;
   }
   .lunar-inputs {
     grid-template-columns: 1.2fr 0.8fr;

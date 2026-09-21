@@ -106,8 +106,14 @@ function render() {
       : [dayInfo(dateKey(year, 1, 1)), dayInfo(dateKey(year, 12, 31))];
   const eras = [...new Set(eraDays.map((day) => day.era))].join(" ／ ");
   const japaneseEras = [...new Set(eraDays.map((day) => day.japaneseEra))].join(" ／ ");
-  $("#month-subtitle").textContent =
-    `${activeView === "calendar" ? englishMonths[month - 1] + " · " : ""}${eras} · 日本 ${japaneseEras}${year < 1873 ? "（西曆推算）" : ""}`;
+  // Non-breaking spaces keep each piece whole when the subtitle wraps.
+  $("#month-subtitle").textContent = [
+    ...(activeView === "calendar" ? [englishMonths[month - 1]] : []),
+    eras,
+    `日本 ${japaneseEras}${year < 1873 ? "（西曆推算）" : ""}`,
+  ]
+    .map((piece) => piece.replaceAll(" ", "\u00a0"))
+    .join(" · ");
   $("#previous").disabled =
     year === MIN_YEAR && (activeView === "terms" || month === 1);
   $("#next").disabled =
