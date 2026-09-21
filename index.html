@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#243e35" />
+    <meta
+      name="description"
+      content="西曆與農曆對照、二十四節氣分鐘時刻、台灣與世界節慶。以台灣時間，讀懂每一天。"
+    />
+    <link rel="icon" type="image/svg+xml" href="./calendar.svg" />
+    <title>日常・萬年曆</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳至月曆</a>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="日常萬年曆首頁"
+        ><span class="brand-mark" aria-hidden="true">日</span
+        ><span
+          >日常<span class="brand-divider"> / </span><small>萬年曆</small></span
+        ></a
+      >
+      <nav aria-label="主要導覽">
+        <button class="nav-button active" id="calendar-tab" aria-pressed="true">
+          月曆
+        </button>
+        <button class="nav-button" id="terms-tab" aria-pressed="false">
+          二十四節氣
+        </button>
+        <button class="nav-button" id="about-button">
+          資料說明 <span aria-hidden="true">↗</span>
+        </button>
+      </nav>
+      <span class="timezone"
+        ><span class="status-dot"></span>台灣時間 <b>UTC+8</b></span
+      >
+    </header>
+
+    <main id="main">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">A LITTLE GUIDE TO EVERY DAY</p>
+          <h1>日子有序，四時有節。</h1>
+          <p class="intro">西曆與農曆，節氣與節慶。把每一天，看得更清楚。</p>
+        </div>
+        <button id="jump-button" class="outline-button">
+          <span aria-hidden="true">⌕</span> 日期查詢與換算
+        </button>
+      </div>
+      <div class="workspace-toolbar">
+        <div class="month-heading">
+          <span id="month-number" aria-hidden="true"></span>
+          <div>
+            <h2 id="month-title"></h2>
+            <p id="month-subtitle"></p>
+          </div>
+        </div>
+        <form id="month-form" class="month-controls" aria-label="選擇年月">
+          <button
+            type="button"
+            id="previous"
+            class="icon-button"
+            aria-label="上一個月"
+          >
+            ‹
+          </button>
+          <label class="visually-hidden" for="year">西元年</label
+          ><input
+            id="year"
+            type="number"
+            min="1901"
+            max="2100"
+            required
+            inputmode="numeric"
+          />
+          <label class="visually-hidden" for="month">月份</label
+          ><select id="month"></select>
+          <button class="small-button" type="submit">前往</button>
+          <button
+            type="button"
+            id="next"
+            class="icon-button"
+            aria-label="下一個月"
+          >
+            ›
+          </button>
+          <button type="button" id="today" class="today-button">今天</button>
+        </form>
+      </div>
+
+      <section id="calendar-view" aria-labelledby="month-title">
+        <div class="calendar-layout">
+          <div class="calendar-panel">
+            <div class="calendar-legend">
+              <span
+                >西曆 <b>日期</b><span class="legend-divider">/</span>農曆
+                <span>日期</span></span
+              ><span
+                ><i class="dot term-dot"></i>節氣
+                <i class="dot taiwan-dot"></i>台灣
+                <i class="dot world-dot"></i>世界</span
+              >
+            </div>
+            <table class="calendar-table" aria-label="西曆與農曆對照月曆">
+              <thead>
+                <tr>
+                  <th scope="col" class="weekend">日</th>
+                  <th scope="col">一</th>
+                  <th scope="col">二</th>
+                  <th scope="col">三</th>
+                  <th scope="col">四</th>
+                  <th scope="col">五</th>
+                  <th scope="col" class="weekend">六</th>
+                </tr>
+              </thead>
+              <tbody id="calendar-body"></tbody>
+            </table>
+            <p class="calendar-hint">
+              <span aria-hidden="true">↳</span> 點選日期查看詳情<span
+                >方向鍵移動日期 · Home 回到月初</span
+              >
+            </p>
+          </div>
+          <aside
+            id="day-detail"
+            class="day-detail"
+            aria-label="所選日期詳情"
+            aria-live="polite"
+          ></aside>
+        </div>
+        <section class="events-section" aria-labelledby="events-title">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">DATES TO REMEMBER</span>
+              <h2 id="events-title">這個月，值得記得</h2>
+            </div>
+            <fieldset class="filters">
+              <legend class="visually-hidden">顯示內容</legend>
+              <label
+                ><input type="checkbox" value="term" checked /><span
+                  >節氣</span
+                ></label
+              ><label
+                ><input type="checkbox" value="taiwan" checked /><span
+                  >台灣節慶</span
+                ></label
+              ><label
+                ><input type="checkbox" value="world" checked /><span
+                  >世界節慶</span
+                ></label
+              >
+            </fieldset>
+          </div>
+          <div id="month-events" class="month-events"></div>
+          <p class="fine-print">
+            節慶為日期與文化紀念資訊；不代表放假。補假、補班與連假請依政府公告。
+          </p>
+        </section>
+      </section>
+
+      <section id="terms-view" hidden aria-labelledby="terms-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE TWENTY-FOUR SOLAR TERMS</p>
+            <h2 id="terms-title">一年的二十四個時刻</h2>
+          </div>
+          <span class="time-label">台灣標準時間 UTC+8</span>
+        </div>
+        <p id="terms-source" class="source-note"></p>
+        <div id="year-terms" class="year-terms"></div>
+      </section>
+      <p id="status" class="status-message" role="status"></p>
+    </main>
+    <footer>
+      <span class="footer-brand">日常・萬年曆</span
+      ><span
+        >1901 — 2100
+        <span class="footer-separator">/</span> 隨四時流轉，與日子同行。</span
+      ><button id="footer-about">曆法與資料來源 ↗</button>
+    </footer>
+
+    <dialog id="about-dialog" aria-labelledby="about-title">
+      <div class="dialog-heading">
+        <h2 id="about-title">曆法與資料來源</h2>
+        <button class="icon-button close-dialog" aria-label="關閉資料說明">
+          ×
+        </button>
+      </div>
+      <div class="about-content">
+        <h3>西曆與農曆</h3>
+        <p>
+          支援西元 1901–2100 年，農曆使用
+          <a
+            href="https://github.com/6tail/lunar-javascript"
+            target="_blank"
+            rel="noopener"
+            >lunar-javascript 1.7.7</a
+          >
+          計算，含閏月與大小月。生肖與干支以農曆正月初一換年。所有日界與節氣以固定
+          UTC+8 表示，不重現台灣歷史夏令時間。
+        </p>
+        <h3>精確到分鐘的節氣</h3>
+        <p>
+          2021–2030 年直接採用<a
+            id="official-link"
+            target="_blank"
+            rel="noopener"
+            >臺北市立天文科學教育館《2021–2030 簡易曆象表》</a
+          >的官方分鐘值。其他年份使用 lunar-javascript
+          的天文算法推算，四捨五入到分鐘並標示「推算」；未逐年官方核驗，遠期時刻會受地球自轉預測影響，不能保證每一分鐘均與未來公告相同。
+        </p>
+        <h3>台灣與世界節慶</h3>
+        <p>
+          收錄台灣常見傳統節日、紀念日，以及精選世界節慶與聯合國國際日。各項日期附來源，地區性節日標明適用地區。這是現代節慶規則的對照，並非各年代法定假日的完整重建，也不是全球所有節慶清單。
+        </p>
+        <p>
+          節慶不等於放假；本版不推算補假與補班。農曆節日不在閏月重複，除夕依當年臘月最後一天決定。
+        </p>
+        <p class="fine-print">
+          本網站是獨立實作，向傳統萬年曆的便利致意；與陸拓資訊無隸屬關係。
+        </p>
+      </div>
+    </dialog>
+    <dialog id="jump-dialog" aria-labelledby="jump-title">
+      <div class="dialog-heading">
+        <h2 id="jump-title">找到那一天</h2>
+        <button class="icon-button close-dialog" aria-label="關閉日期查詢">
+          ×
+        </button>
+      </div>
+      <form id="solar-form" class="conversion-form">
+        <h3>用西曆查詢</h3>
+        <label for="solar-date">西曆日期</label>
+        <div class="form-row">
+          <input
+            type="date"
+            id="solar-date"
+            min="1901-01-01"
+            max="2100-12-31"
+            required
+          /><button type="submit" class="solid-button">前往日期</button>
+        </div>
+      </form>
+      <form id="lunar-form" class="conversion-form">
+        <h3>用農曆換算</h3>
+        <div class="lunar-inputs">
+          <label
+            >農曆年（西元）<input
+              type="number"
+              id="lunar-year"
+              min="1900"
+              max="2100"
+              required /></label
+          ><label>農曆月<select id="lunar-month"></select></label
+          ><label>農曆日<select id="lunar-day"></select></label>
+        </div>
+        <button type="submit" class="solid-button">換算並前往</button>
+        <p class="fine-print">閏月會依所選年份自動列出。</p>
+      </form>
+      <p id="conversion-error" role="alert"></p>
+    </dialog>
+    <noscript>請開啟 JavaScript 以使用農曆換算與萬年曆。</noscript>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
