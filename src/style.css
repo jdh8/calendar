@@ -192,9 +192,12 @@ main {
   padding: 12px 15px;
   font-size: 12px;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
 }
 .outline-button span {
   font-size: 19px;
+  line-height: 1;
   margin-right: 8px;
 }
 .outline-button:hover,
@@ -263,6 +266,8 @@ main {
   place-items: center;
   font-size: 23px;
   line-height: 1;
+  /* ponytail: ‹ › sit low in Noto Sans TC; nudge up */
+  padding-bottom: 7px;
 }
 .today-button,
 .solid-button {
