@@ -863,9 +863,6 @@ dialog::backdrop {
   line-height: 1.9;
   color: #62705c;
 }
-.about-content .fine-print {
-  font-size: 10px;
-}
 .conversion-form {
   border-top: 1px solid var(--line);
   padding-top: 1px;

@@ -1,6 +1,6 @@
 # 日常・萬年曆
 
-向傳統線上萬年曆致意的獨立實作。繁體中文、台灣時間、純靜態網站，可放在 GitHub Pages 的根目錄或專案子路徑。
+繁體中文、台灣時間、純靜態的萬年曆網站，可放在 GitHub Pages 的根目錄或專案子路徑。
 
 ## 本機執行
 
@@ -75,3 +75,7 @@ npm run preview
 - `scripts/import-terms.mjs`：下載並驗證 1801–2100 年日本節氣資料。
 - `src/main.js`、`src/style.css`、`index.html`：原生 JavaScript 與響應式介面。
 - `scripts/test-*.mjs`：Node 內建斷言檢查，不需要測試框架。
+
+## 鳴謝
+
+靈感來自陸拓資訊的線上萬年曆。本站為獨立實作，未使用其程式碼或資料，與陸拓資訊無隸屬關係。
