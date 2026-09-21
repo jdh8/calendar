@@ -68,7 +68,7 @@
           ><input
             id="year"
             type="number"
-            min="1901"
+            min="1801"
             max="2100"
             required
             inputmode="numeric"
@@ -174,7 +174,7 @@
     <footer>
       <span class="footer-brand">日常・萬年曆</span
       ><span
-        >1901 — 2100
+        >1801 — 2100
         <span class="footer-separator">/</span> 隨四時流轉，與日子同行。</span
       ><button id="footer-about">曆法與資料來源 ↗</button>
     </footer>
@@ -189,7 +189,7 @@
       <div class="about-content">
         <h3>西曆與農曆</h3>
         <p>
-          支援西元 1901–2100 年，農曆使用
+          支援西元 1801–2100 年，農曆使用
           <a
             href="https://github.com/6tail/lunar-javascript"
             target="_blank"
@@ -197,7 +197,8 @@
             >lunar-javascript 1.7.7</a
           >
           計算，含閏月與大小月。生肖與干支以農曆正月初一換年。所有日界與節氣以固定
-          UTC+8 表示，不重現台灣歷史夏令時間。
+          UTC+8 表示，不重現歷史地方時或台灣夏令時間；西曆一律使用格里曆。
+          早期農曆為套件推算，未逐年校對歷史頒行曆書。
         </p>
         <h3>精確到分鐘的節氣</h3>
         <p>
@@ -235,7 +236,7 @@
           <input
             type="date"
             id="solar-date"
-            min="1901-01-01"
+            min="1801-01-01"
             max="2100-12-31"
             required
           /><button type="submit" class="solid-button">前往日期</button>
@@ -248,7 +249,7 @@
             >農曆年（西元）<input
               type="number"
               id="lunar-year"
-              min="1900"
+              min="1800"
               max="2100"
               required /></label
           ><label>農曆月<select id="lunar-month"></select></label

@@ -3,7 +3,7 @@ import officialTerms from "./official-terms.json" with { type: "json" };
 import { festivalsForDate } from "./festivals.js";
 
 const { Solar, Lunar, LunarYear, LunarMonth } = lunar;
-export const MIN_YEAR = 1901;
+export const MIN_YEAR = 1801;
 export const MAX_YEAR = 2100;
 export const OFFICIAL_SOURCE =
   "https://www-ws.gov.taipei/001/Upload/439/relfile/47557/7970699/11519980-d0a1-4547-a2ea-b86d6ad06fea.pdf";
@@ -135,8 +135,8 @@ export function solarTerms(year) {
 }
 
 export function lunarMonths(year) {
-  if (!Number.isInteger(year) || year < 1900 || year > MAX_YEAR)
-    throw new RangeError("農曆年份範圍為 1900–2100 年。");
+  if (!Number.isInteger(year) || year < MIN_YEAR - 1 || year > MAX_YEAR)
+    throw new RangeError(`農曆年份範圍為 ${MIN_YEAR - 1}–${MAX_YEAR} 年。`);
   return LunarYear.fromYear(year)
     .getMonths()
     .filter((month) => month.getYear() === year)
