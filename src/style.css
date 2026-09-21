@@ -417,9 +417,7 @@ main {
   font-size: 10px;
   line-height: 1.5;
   display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 .day-event small {
   display: block;
@@ -802,7 +800,7 @@ main {
 }
 footer {
   border-top: 1px solid var(--line);
-  max-width: 1184px;
+  max-width: min(1184px, calc(100% - 56px));
   margin: 20px auto 0;
   padding: 24px 0 30px;
   display: flex;
@@ -949,10 +947,6 @@ noscript {
   }
   .year-terms {
     grid-template-columns: repeat(4, 1fr);
-  }
-  footer {
-    margin-left: 28px;
-    margin-right: 28px;
   }
 }
 @media (max-width: 760px) {
@@ -1163,6 +1157,7 @@ noscript {
     font-size: 22px;
   }
   footer {
+    max-width: none;
     margin: 8px 18px 0;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -1240,6 +1235,12 @@ noscript {
     width: 95px;
     padding: 7px;
   }
+  .lunar-inputs {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+  .lunar-inputs label:first-child {
+    grid-column: 1/-1;
+  }
   .today-marker {
     font-size: 0;
     width: 5px;
@@ -1249,6 +1250,19 @@ noscript {
     position: absolute;
     top: 5px;
     right: 5px;
+  }
+}
+@media (max-width: 350px) {
+  #previous-year,
+  #next-year {
+    display: none;
+  }
+}
+/* iOS Safari zooms the page when focusing a field smaller than 16px */
+@media (pointer: coarse) {
+  input,
+  select {
+    font-size: 16px !important;
   }
 }
 @media (prefers-reduced-motion: reduce) {
