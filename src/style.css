@@ -158,13 +158,6 @@ main {
   margin: auto;
   padding: 44px 28px 20px;
 }
-.page-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 42px;
-}
 .eyebrow {
   font-size: 12px;
   letter-spacing: 2px;
@@ -172,24 +165,12 @@ main {
   color: var(--muted);
   margin: 0;
 }
-.page-heading h1 {
-  font-family: var(--serif);
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: 3px;
-  margin: 13px 0 12px;
-}
-.intro {
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  color: var(--muted);
-  margin: 0;
-}
 .outline-button {
   background: transparent;
   border: 1px solid #cfd7cb;
-  border-radius: 5px;
-  padding: 12px 15px;
+  border-radius: 4px;
+  height: 35px;
+  padding: 0 12px;
   font-size: 14px;
   white-space: nowrap;
   display: inline-flex;
@@ -198,7 +179,10 @@ main {
 .outline-button span {
   font-size: 19px;
   line-height: 1;
-  margin-right: 8px;
+  margin-right: 6px;
+}
+.outline-button b {
+  font-weight: inherit;
 }
 .outline-button:hover,
 .icon-button:hover {
@@ -1052,34 +1036,15 @@ noscript {
   main {
     padding: 30px 18px 15px;
   }
-  .page-heading {
-    display: block;
-    margin-bottom: 31px;
-    align-items: flex-start;
-  }
-  .page-heading h1 {
-    font-size: 25px;
-    letter-spacing: 1px;
-  }
-  .page-heading .eyebrow {
-    font-size: 11px;
-    letter-spacing: 1.6px;
-  }
-  .intro {
-    font-size: 13px;
-    line-height: 1.8;
-    max-width: none;
-  }
   .outline-button {
-    font-size: 12px;
-    padding: 8px 9px;
-    white-space: normal;
-    width: auto;
-    line-height: 1.7;
-    flex-shrink: 0;
-    margin-top: 16px;
+    padding: 0;
+    width: 35px;
+    justify-content: center;
   }
   .outline-button span {
+    margin: 0;
+  }
+  .outline-button b {
     display: none;
   }
   .workspace-toolbar {
@@ -1227,12 +1192,6 @@ noscript {
   .lunar-detail h3 {
     font-size: 20px;
   }
-  .page-heading h1 {
-    font-size: 23px;
-  }
-  .intro {
-    font-size: 12px;
-  }
   .lunar-inputs {
     grid-template-columns: 1.2fr 0.8fr;
   }
@@ -1270,7 +1229,6 @@ noscript {
 }
 @media print {
   .site-header nav,
-  .page-heading,
   .month-controls,
   .filters,
   footer button,
