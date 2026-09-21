@@ -338,6 +338,8 @@ main {
   color: var(--red);
 }
 .calendar-table td {
+  /* Tiny height lets .day's height: 100% resolve to the row's full height */
+  height: 1px;
   padding: 0;
   vertical-align: top;
   border-top: 1px solid var(--line);
