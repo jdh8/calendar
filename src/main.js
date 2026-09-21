@@ -196,8 +196,8 @@ function renderTerms(year) {
     .join("");
 }
 
-$("#month-form").addEventListener("submit", (event) => {
-  event.preventDefault();
+$(".month-controls").addEventListener("input", () => {
+  if (!$("#year").validity.valid) return;
   const year = Number($("#year").value),
     month = Number($("#month").value);
   navigate(

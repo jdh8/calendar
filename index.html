@@ -55,7 +55,7 @@
             <p id="month-subtitle"></p>
           </div>
         </div>
-        <form id="month-form" class="month-controls" aria-label="選擇年月">
+        <div class="month-controls" role="group" aria-label="選擇年月">
           <button
             type="button"
             id="previous"
@@ -75,7 +75,6 @@
           />
           <label class="visually-hidden" for="month">月份</label
           ><select id="month"></select>
-          <button class="small-button" type="submit">前往</button>
           <button
             type="button"
             id="next"
@@ -85,7 +84,7 @@
             ›
           </button>
           <button type="button" id="today" class="today-button">今天</button>
-        </form>
+        </div>
       </div>
 
       <section id="calendar-view" aria-labelledby="month-title">
