@@ -14,6 +14,50 @@ import {
   TERM_NAMES,
 } from "../src/calendar.js";
 
+// Qing years follow lunar New Year; the Republic begins on 1912-01-01.
+for (const [date, era] of [
+  ["1801-01-01", "清 嘉慶 5 年"],
+  ["1801-02-13", "清 嘉慶 6 年"],
+  ["1821-02-02", "清 嘉慶 25 年"],
+  ["1821-02-03", "清 道光元年"],
+  ["1851-01-31", "清 道光 30 年"],
+  ["1851-02-01", "清 咸豐元年"],
+  ["1862-01-29", "清 咸豐 11 年"],
+  ["1862-01-30", "清 同治元年"],
+  ["1875-02-05", "清 同治 13 年"],
+  ["1875-02-06", "清 光緒元年"],
+  ["1909-01-21", "清 光緒 34 年"],
+  ["1909-01-22", "清 宣統元年"],
+  ["1911-12-31", "清 宣統 3 年"],
+  ["1912-01-01", "民國 1 年"],
+  ["1945-10-24", "民國 34 年"],
+  ["1945-10-25", "民國 34 年"],
+  ["2026-09-21", "民國 115 年"],
+  ["2100-12-31", "民國 189 年"],
+]) assert.equal(dayInfo(date).era, era, date);
+
+// Modern Japanese era boundaries, including both sides of each change.
+for (const [date, era] of [
+  ["1801-01-01", "寛政 13 年"],
+  ["1851-07-01", "嘉永 4 年"],
+  ["1873-01-01", "明治 6 年"],
+  ["1912-07-29", "明治 45 年"],
+  ["1912-07-30", "大正元年"],
+  ["1926-12-24", "大正 15 年"],
+  ["1926-12-25", "昭和元年"],
+  ["1945-10-25", "昭和 20 年"],
+  ["1989-01-07", "昭和 64 年"],
+  ["1989-01-08", "平成元年"],
+  ["2019-04-30", "平成 31 年"],
+  ["2019-05-01", "令和元年"],
+  ["2026-09-21", "令和 8 年"],
+  ["2100-12-31", "令和 82 年"],
+]) assert.equal(dayInfo(date).japaneseEra, era, date);
+assert.deepEqual(
+  [...new Set(monthDays(1912, 7).map((day) => day.japaneseEra))],
+  ["明治 45 年", "大正元年"],
+);
+
 // Independent ICU Chinese-calendar spot checks; these are not a historical almanac audit.
 const chineseCalendar = new Intl.DateTimeFormat("en-u-ca-chinese", {
   timeZone: "UTC",

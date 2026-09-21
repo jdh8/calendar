@@ -101,10 +101,14 @@ function render() {
     activeView === "terms"
       ? `${year} 年 · 二十四節氣`
       : `${year} 年 ${months[month - 1]}月`;
-  const rocYear =
-    year >= 1912 ? `民國 ${year - 1911} 年` : `民國前 ${1912 - year} 年`;
+  const eraDays =
+    activeView === "calendar"
+      ? days
+      : [dayInfo(dateKey(year, 1, 1)), dayInfo(dateKey(year, 12, 31))];
+  const eras = [...new Set(eraDays.map((day) => day.era))].join(" ／ ");
+  const japaneseEras = [...new Set(eraDays.map((day) => day.japaneseEra))].join(" ／ ");
   $("#month-subtitle").textContent =
-    `${activeView === "calendar" ? englishMonths[month - 1] + " · " : ""}${rocYear}`;
+    `${activeView === "calendar" ? englishMonths[month - 1] + " · " : ""}${eras} · 日本 ${japaneseEras}${year < 1873 ? "（西曆推算）" : ""}`;
   $("#previous").disabled =
     year === MIN_YEAR && (activeView === "terms" || month === 1);
   $("#next").disabled =
@@ -160,7 +164,7 @@ function renderDetail(info) {
   // Day details always retain all events; filters only control the overview.
   const events = info.festivals;
   $("#day-detail").innerHTML =
-    `<div class="detail-top"><span class="eyebrow">${info.date === todayInTaiwan() ? "TODAY" : "SELECTED DAY"}</span><span class="detail-weekday">星期${weekdays[info.weekday]}</span></div><div class="detail-number">${info.day}<span class="day-stamp" aria-hidden="true">日<br>常</span></div><p class="detail-date">${info.year} 年 ${info.month} 月 ${info.day} 日</p><div class="lunar-detail"><span class="eyebrow">農曆</span><h3>${info.lunarMonthName}${info.lunarDayName}</h3><p>${info.ganZhi}年 · 肖${info.animal}</p></div><div class="detail-events">${info.term ? `<div class="detail-event"><span class="pill term">節氣</span><h4>${info.term.name} <time>${info.term.time}</time></h4><p>台灣時間 · ${info.term.official ? "官方曆象表" : "天文推算"}</p><a href="${info.term.source}" target="_blank" rel="noopener">查看來源 ↗</a></div>` : ""}${events.map((event) => `<div class="detail-event"><span class="pill ${event.category}">${categoryNames[event.category]}</span><h4>${escape(event.name)}</h4><p>${escape(event.note)}</p><a href="${escape(event.source)}" target="_blank" rel="noopener">查看來源 ↗</a></div>`).join("")}${!info.term && !events.length ? '<p class="quiet-day">平常的日子，也值得好好度過。<br><small>這一天沒有收錄的節慶。</small></p>' : ""}</div>${nextTerm ? `<button class="next-term" data-jump="${nextTerm.date}"><span class="eyebrow">下一個節氣 <span aria-hidden="true">↗</span></span><strong>${nextTerm.name}<span class="sun-symbol" aria-hidden="true">☼</span></strong><span>${Number(nextTerm.date.slice(5, 7))} 月 ${Number(nextTerm.date.slice(8))} 日 · ${nextTerm.time}</span><small>${nextTerm.official ? "官方曆象表" : "天文推算"} · UTC+8</small></button>` : ""}`;
+    `<div class="detail-top"><span class="eyebrow">${info.date === todayInTaiwan() ? "TODAY" : "SELECTED DAY"}</span><span class="detail-weekday">星期${weekdays[info.weekday]}</span></div><div class="detail-number">${info.day}<span class="day-stamp" aria-hidden="true">日<br>常</span></div><p class="detail-date">${info.year} 年 ${info.month} 月 ${info.day} 日<br>${info.era}<br>日本 ${info.japaneseEra}${info.year < 1873 ? "（西曆推算）" : ""}</p><div class="lunar-detail"><span class="eyebrow">農曆</span><h3>${info.lunarMonthName}${info.lunarDayName}</h3><p>${info.ganZhi}年 · 肖${info.animal}</p></div><div class="detail-events">${info.term ? `<div class="detail-event"><span class="pill term">節氣</span><h4>${info.term.name} <time>${info.term.time}</time></h4><p>台灣時間 · ${info.term.official ? "官方曆象表" : "天文推算"}</p><a href="${info.term.source}" target="_blank" rel="noopener">查看來源 ↗</a></div>` : ""}${events.map((event) => `<div class="detail-event"><span class="pill ${event.category}">${categoryNames[event.category]}</span><h4>${escape(event.name)}</h4><p>${escape(event.note)}</p><a href="${escape(event.source)}" target="_blank" rel="noopener">查看來源 ↗</a></div>`).join("")}${!info.term && !events.length ? '<p class="quiet-day">平常的日子，也值得好好度過。<br><small>這一天沒有收錄的節慶。</small></p>' : ""}</div>${nextTerm ? `<button class="next-term" data-jump="${nextTerm.date}"><span class="eyebrow">下一個節氣 <span aria-hidden="true">↗</span></span><strong>${nextTerm.name}<span class="sun-symbol" aria-hidden="true">☼</span></strong><span>${Number(nextTerm.date.slice(5, 7))} 月 ${Number(nextTerm.date.slice(8))} 日 · ${nextTerm.time}</span><small>${nextTerm.official ? "官方曆象表" : "天文推算"} · UTC+8</small></button>` : ""}`;
 }
 
 function renderEvents() {

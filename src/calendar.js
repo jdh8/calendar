@@ -3,6 +3,19 @@ import officialTerms from "./official-terms.json" with { type: "json" };
 import { festivalsForDate } from "./festivals.js";
 
 const { Solar, Lunar, LunarYear, LunarMonth } = lunar;
+const japaneseYear = new Intl.DateTimeFormat("ja-JP-u-ca-japanese", {
+  timeZone: "UTC",
+  era: "long",
+  year: "numeric",
+});
+const qingEras = [
+  [1909, "宣統"],
+  [1875, "光緒"],
+  [1862, "同治"],
+  [1851, "咸豐"],
+  [1821, "道光"],
+  [1796, "嘉慶"],
+];
 export const MIN_YEAR = 1801;
 export const MAX_YEAR = 2100;
 export const OFFICIAL_SOURCE =
@@ -156,6 +169,13 @@ export function fromLunar(year, month, day) {
   return value;
 }
 
+function eraLabel(year, lunarYear) {
+  if (year >= 1912) return `民國 ${year - 1911} 年`;
+  const [start, name] = qingEras.find(([start]) => lunarYear >= start);
+  const count = lunarYear - start + 1;
+  return `清 ${name}${count === 1 ? "元年" : ` ${count} 年`}`;
+}
+
 export function dayInfo(value) {
   const { year, month, day } = parseDate(value);
   const solar = Solar.fromYmd(year, month, day);
@@ -168,6 +188,11 @@ export function dayInfo(value) {
     lunarDay === LunarMonth.fromYm(l.getYear(), 12).getDayCount();
   const info = {
     date: value,
+    era: eraLabel(year, l.getYear()),
+    // ponytail: Intl uses a proleptic calendar before 1873; a historical Japanese lunisolar calendar needs separate data.
+    japaneseEra: japaneseYear
+      .format(new Date(`${value}T00:00:00Z`))
+      .replace(/(\d+)/, " $1 "),
     year,
     month,
     day,
