@@ -112,6 +112,10 @@ function render() {
     year === MIN_YEAR && (activeView === "terms" || month === 1);
   $("#next").disabled =
     year === MAX_YEAR && (activeView === "terms" || month === 12);
+  $("#previous-year").disabled = year === MIN_YEAR;
+  $("#next-year").disabled = year === MAX_YEAR;
+  // ponytail: ‹ › already step a year in the terms view
+  $("#previous-year").hidden = $("#next-year").hidden = activeView === "terms";
   $("#previous").setAttribute(
     "aria-label",
     activeView === "terms" ? "上一年" : "上一個月",
@@ -209,14 +213,16 @@ $(".month-controls").addEventListener("input", () => {
     ),
   );
 });
-for (const [id, direction] of [
+for (const [id, months] of [
+  ["previous-year", -12],
   ["previous", -1],
   ["next", 1],
+  ["next-year", 12],
 ]) {
   $(`#${id}`).addEventListener("click", () => {
     try {
       navigate(
-        shiftMonth(selected, direction * (activeView === "terms" ? 12 : 1)),
+        shiftMonth(selected, activeView === "terms" ? Math.sign(months) * 12 : months),
       );
     } catch (error) {
       $("#status").textContent = error.message;

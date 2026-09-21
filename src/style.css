@@ -278,6 +278,7 @@ main {
   font-size: 12px;
 }
 .today-button {
+  white-space: nowrap;
   margin-left: 8px;
   height: 35px;
   padding: 0 17px;
@@ -1033,6 +1034,7 @@ noscript {
   }
   .month-controls {
     gap: 5px;
+    width: 100%;
   }
   .month-controls input {
     width: 75px;
@@ -1041,7 +1043,7 @@ noscript {
     width: 71px;
   }
   .today-button {
-    margin-left: 4px;
+    margin-left: auto;
   }
   .calendar-layout {
     grid-template-columns: 1fr;
@@ -1212,7 +1214,6 @@ noscript {
   }
   .month-controls {
     gap: 4px;
-    width: 100%;
   }
   .month-controls input {
     width: 70px;
@@ -1221,7 +1222,6 @@ noscript {
     width: 69px;
   }
   .today-button {
-    margin-left: auto;
     padding: 0 12px;
   }
   .term-card {
