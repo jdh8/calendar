@@ -512,6 +512,9 @@ main {
   color: #62705c;
   margin: 0;
 }
+.lunar-detail .zodiac {
+  margin-top: 6px;
+}
 .detail-events {
   padding: 0 22px;
 }

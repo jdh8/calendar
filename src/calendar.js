@@ -25,6 +25,21 @@ export const TERM_NAMES =
     " ",
   );
 export const pad = (value) => String(value).padStart(2, "0");
+// Tropical zodiac boundaries are the twelve 中氣 (solar longitude multiples of 30°).
+export const ZODIAC = {
+  雨水: "雙魚",
+  春分: "牡羊",
+  穀雨: "金牛",
+  小滿: "雙子",
+  夏至: "巨蟹",
+  大暑: "獅子",
+  處暑: "處女",
+  秋分: "天秤",
+  霜降: "天蠍",
+  小雪: "射手",
+  冬至: "摩羯",
+  大寒: "水瓶",
+};
 const traditional = (value) =>
   value.replace(
     /[闰腊马龙鸡猪惊蛰谷满种处]/g,
@@ -141,6 +156,20 @@ function eraLabel(year, lunarYear) {
   return `清 ${name}${count === 1 ? "元年" : ` ${count} 年`}`;
 }
 
+export function zodiac(value) {
+  const majors = solarTerms(parseDate(value).year).filter(
+    (term) => ZODIAC[term.name],
+  );
+  // Before 大寒 the sign comes from last year's 冬至; no need to load that year.
+  const from = majors.findLast((term) => term.date < value)?.name || "冬至";
+  const change = majors.find((term) => term.date === value);
+  return {
+    name: ZODIAC[from],
+    from,
+    change: change ? { name: ZODIAC[change.name], term: change.name, time: change.time } : null,
+  };
+}
+
 export function dayInfo(value) {
   const { year, month, day } = parseDate(value);
   const solar = Solar.fromYmd(year, month, day);
@@ -171,6 +200,7 @@ export function dayInfo(value) {
     lunarDayName: l.getDayInChinese(),
     ganZhi: l.getYearInGanZhi(),
     animal: traditional(l.getYearShengXiao()),
+    zodiac: zodiac(value),
     term,
   };
   return { ...info, festivals: festivalsForDate(info) };

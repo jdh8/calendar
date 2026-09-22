@@ -14,7 +14,20 @@ import {
   lunarMonths,
   monthDays,
   TERM_NAMES,
+  zodiac,
 } from "../src/calendar.js";
+
+// Zodiac follows the 中氣 instant; the boundary day reports both signs.
+for (const [date, expected] of [
+  ["1801-01-01", { name: "摩羯", from: "冬至", change: null }],
+  ["2026-01-19", { name: "摩羯", from: "冬至", change: null }],
+  ["2026-01-20", { name: "摩羯", from: "冬至", change: { name: "水瓶", term: "大寒", time: "09:45" } }],
+  ["2026-01-21", { name: "水瓶", from: "大寒", change: null }],
+  ["2026-03-20", { name: "雙魚", from: "雨水", change: { name: "牡羊", term: "春分", time: "22:46" } }],
+  ["2026-03-21", { name: "牡羊", from: "春分", change: null }],
+  ["2026-09-22", { name: "處女", from: "處暑", change: null }],
+  ["2100-12-31", { name: "摩羯", from: "冬至", change: null }],
+]) assert.deepEqual(zodiac(date), expected, date);
 
 // Qing years follow lunar New Year; the Republic begins on 1912-01-01.
 for (const [date, era] of [
